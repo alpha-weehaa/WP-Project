@@ -1,0 +1,44 @@
+body {margin:0;}
+
+.nav_top ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.nav_top ul {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.nav_top li {
+    float: left;
+}
+
+.nav_top li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.nav_top li a:hover {
+    background-color: #111;
+}
+
+.nav_top .active {
+    background-color: #4CAF50;
+}
+
+.nav_side {
+	margin: 0;
+    padding: 42px 0px;
+	width: 180px;
+	background-color: #0FEC81;
+	height: 100%;
+}

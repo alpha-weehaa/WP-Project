@@ -111,8 +111,9 @@
 .nav-sm .hidden-small {
   visibility: hidden; }
 
+/** body column correspond nav-md **/
 .nav-sm .container.body .right_col {
-  padding: 10px 20px;
+  padding: 57.5px 20px;
   margin-left: 70px;
   z-index: 2; }
 
@@ -294,8 +295,9 @@
 body .container.body .right_col {
   background: #F7F7F7; }
 
+/** body column correspond .nav-sm .container.body .right_col **/
 .nav-md .container.body .right_col {
-  padding: 10px 20px 0;
+  padding: 57.5px 20px 0;
   margin-left: 230px; }
 
 .nav_title {
@@ -318,7 +320,7 @@ body .container.body .right_col {
     padding-right: 0; }
 
   .right_col {
-    padding: 10px !important; } }
+    padding: 57.5px !important; } }
 @media (max-width: 1200px) {
   .x_title h2 {
     width: 62%;
@@ -739,7 +741,7 @@ a:hover, a:focus {
 
 .panel_toolbox {
   float: right;
-  min-width: 70px; }
+  min-width: 0px; }
 
 .panel_toolbox > li {
   float: left;

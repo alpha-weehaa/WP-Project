@@ -430,7 +430,7 @@ body {
 
 /**top_nav fixed**/
 .main_container .top_nav {
-  position: fixed;
+  position: fixed,relative;
   z-index: 2;
   display: block;
   margin-left: 230px; }

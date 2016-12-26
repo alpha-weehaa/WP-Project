@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript">
+	$(function(){
+
+		var $block = $('#abgneBlock'),
+			$slides = $('ul.list', $block),
+			_width = $block.width(),
+			$li = $('li', $slides),
+			_animateSpeed = 600, 
+			timer, _showSpeed = 1000, _stop = false;
+
+	
+		var _str = '';
+		for(var i=0, j=$li.length;i<j;i++){
+			_str += '<li class="playerControl_' + (i+1) + '"></li>';
+		}
+
+
+		var $playerControl = $('<ul class="playerControl"></ul>').html(_str).appendTo($slides.parent()).css('left', function(){
+			return (_width - $(this).width()) / 2;
+		});
+		
+
+		var $playerControlLi = $playerControl.find('li').mouseover(function(){
+			var $this = $(this);
+			$this.addClass('current').siblings('.current').removeClass('current');
+
+			clearTimeout(timer);
+			
+			$slides.stop().animate({
+				left: _width * $this.index() * -1
+			}, _animateSpeed, function(){
+				if(!_stop) timer = setTimeout(move, _showSpeed);
+			});
+			return false;
+		}).eq(0).mouseover().end();
+
+
+		$block.hover(function(){
+			_stop = true;
+			clearTimeout(timer);
+		}, function(){
+			_stop = false;
+			timer = setTimeout(move, _showSpeed);
+		});
+		
+		function move(){
+			var _index = $('.current').index();
+			$playerControlLi.eq((_index + 1) % $playerControlLi.length).mouseover();
+		}
+	});
+     </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>名字不會取遊戲論壇</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="home.html" class="site_title"> <i class="fa fa-question-circle"></i> <span> 名字不會取</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+			<!--
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>John Doe</h2>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+			-->
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3> </h3>
+                <ul class="nav side-menu">
+                  <li><a href="home.html"><i class="fa fa-home"></i> 首頁 </a>
+                  </li>
+                  <li><a href="news.html"><i class="fa fa-newspaper-o"></i> 新聞資訊 </a>
+                  </li>
+                  <li><a href="leaderboard.html"><i class="fa fa-star-o"></i> 排行榜 </a>
+                  </li>
+				  <!--
+                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="chartjs.html">Chart JS</a></li>
+                      <li><a href="chartjs2.html">Chart JS2</a></li>
+                      <li><a href="morisjs.html">Moris JS</a></li>
+                      <li><a href="echarts.html">ECharts</a></li>
+                      <li><a href="other_charts.html">Other Charts</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                    </ul>
+                  </li>
+				  -->
+                </ul>
+              </div>
+             
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+			<!--
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+			-->
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+				
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class=" fa fa-user"></span> 登入
+					<!-- <img src="" alt=""> 
+                    <span class=" fa fa-angle-down"></span>
+					-->
+                  </a>
+			  
+				  
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+					<!--
+                    <li><a href="javascript:;"> 修改個人資料</a></li>
+					<li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li> 
+                    <li><a href="javascript:;"> 幫助</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 登出</a></li>
+					-->
+                  </ul>
+                </li>
+				
+				
+				
+				<!-- envelope(6) -->
+				<!-- 
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+				<!-- /end envelope -->
+			
+			  </ul>
+			  
+			  <!--search bar-->
+			  <div class="nav navbar-nav navbar-left">
+				<div class="col-md-12 col-sm-12 col-xs-12 form-group top_search">
+                  <div class="input-group">
+					<input type="text" class="form-control" placeholder="搜尋">
+                    <span class="input-group-btn">
+					<button class="btn btn-default" type="button">Go!</button>
+					</span>
+                  </div>
+				</div>
+			  </div>
+			  <!--search bar-->
+			  
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+              
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>新遊戲期待榜</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">排<br>名</th>
+                            <th class="column-title">發行日期</th>
+                            <th class="column-title">遊戲</th>
+                            <th class="column-title">熱度</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">1</i></td>
+                            <td class=" ">2017-01-24</td>
+                            <td class=" ">惡靈古堡7<br><img u="image" src="img/game/new1.jpg" width="85" height="124" /></td>
+                            <td class=" ">131214</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" "><i class="success fa fa-trophy">2</i></td>
+                            <td class=" ">2016-12-31</td>
+                            <td class=" ">真三國無雙8<br><img u="image" src="img/game/new2.jpg" width="85" height="124" /></td>
+                            <td class=" ">46875</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">3</i></td>
+                            <td class=" ">2017-02-16</td>
+                            <td class=" ">三國志13PK威力加強版<br><img u="image" src="img/game/new3.jpg" width="85" height="124" /></td>
+                            <td class=" ">38154</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">4</td>
+                            <td class=" ">2017-03-07</td>
+                            <td class=" ">尼爾：機械紀元</td>
+                            <td class=" ">37454</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">5</td>
+                            <td class=" ">2016-12-31</td>
+                            <td class=" ">槍火遊俠</td>
+                            <td class=" ">20154</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">6</td>
+                            <td class=" ">2017-02-14</td>
+                            <td class=" ">榮耀戰魂</td>
+                            <td class=" ">18818</td>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">7</td>
+                            <td class=" ">2017-01-31</td>
+                            <td class=" ">十三號星期五：遊戲版</td>
+                            <td class=" ">15347</td>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">8</td>
+                            <td class=" ">2016-13-31</td>
+                            <td class=" ">軒轅劍7</td>
+                            <td class=" ">13147</td>
+                          </tr>
+
+                          <tr class="even pointer">
+                            <td class=" ">9</td>
+                            <td class=" ">2016-12-30</td>
+                            <td class=" ">海賊</td>
+                            <td class=" ">8579</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">10</td>
+                            <td class=" ">2017-02-14</td>
+                            <td class=" ">狙擊精英</td>
+                            <td class=" ">5534</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+			  <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>新遊戲人氣榜</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     
+					 <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">排<br>名</th>
+                            <th class="column-title">遊戲</th>
+                            <th class="column-title">人氣</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">1</i></td>
+                            <td class=" ">帝國文明6<br><img u="image" src="img/game/nice1.jpg" width="85" height="124" /></td>
+                            <td class=" ">331214</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" "><i class="success fa fa-trophy">2</i></td>
+                            <td class=" ">決勝時刻13：無盡戰爭<br><img u="image" src="img/game/nice2.jpg" width="85" height="124" /></td>
+                            <td class=" ">246875</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">3</i></td>
+                            <td class=" ">看門狗2<br><img u="image" src="img/game/nice3.jpg" width="85" height="124" /></td>
+                            <td class=" ">238154</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">4</td>
+                            <td class=" ">龍珠：超宇宙2</td>
+                            <td class=" ">137454</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">5</td>
+                            <td class=" ">陰屍路：第三季</td>
+                            <td class=" ">120154</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">6</td>
+                            <td class=" ">異星探險家</td>
+                            <td class=" ">118818</td>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">7</td>
+                            <td class=" ">去年</td>
+                            <td class=" ">114347</td>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">8</td>
+                            <td class=" ">最終幻想15</td>
+                            <td class=" ">83147</td>
+                          </tr>
+
+                          <tr class="even pointer">
+                            <td class=" ">9</td>
+                            <td class=" ">影子戰術：將軍之刃</td>
+                            <td class=" ">82579</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">10</td>
+                            <td class=" ">足球經理2017</td>
+                            <td class=" ">75534</td>
+                          </tr>
+						  
+						  <tr class="even pointer">
+                            <td class=" ">11</td>
+                            <td class=" ">太空戰航：死亡之翼</td>
+                            <td class=" ">64579</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">12</td>
+                            <td class=" ">羞辱2</td>
+                            <td class=" ">55734</td>
+                          </tr>
+						  <tr class="even pointer">
+                            <td class=" ">13</td>
+                            <td class=" ">暴君</td>
+                            <td class=" ">48479</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">14</td>
+                            <td class=" ">最後的守護者</td>
+                            <td class=" ">45434</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+			  <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>2016年人氣榜</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">排<br>名</th>
+                            <th class="column-title">遊戲</th>
+                            <th class="column-title">人氣</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">1</i></td>
+                            <td class=" ">三國志13<br><img u="image" src="img/game/20161.jpg" width="85" height="124" /></td>
+                            <td class=" ">2333544</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" "><i class="success fa fa-trophy">2</i></td>
+                            <td class=" ">古墓奇兵：崛起<br><img u="image" src="img/game/20162.jpg" width="85" height="124" /></td>
+                            <td class=" ">2281745</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" "><i class="success fa fa-trophy">3</i></td>
+                            <td class=" ">火影忍者：究極忍者風暴4<br><img u="image" src="img/game/20163.jpg" width="85" height="124" /></td>
+                            <td class=" ">1158154</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">4</td>
+                            <td class=" ">黑暗靈魂3</td>
+                            <td class=" ">937984</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">5</td>
+                            <td class=" ">NBA 2K17</td>
+                            <td class=" ">545854</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">6</td>
+                            <td class=" ">帝國文明6</td>
+                            <td class=" ">331214</td>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class=" ">7</td>
+                            <td class=" ">極地戰嚎：野蠻紀源</td>
+                            <td class=" ">218377</td>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">8</td>
+                            <td class=" ">鬥陣特工</td>
+                            <td class=" ">193187</td>
+                          </tr>
+
+                          <tr class="even pointer">
+                            <td class=" ">9</td>
+                            <td class=" ">信長之野望創造：戰國立志傳</td>
+                            <td class=" ">182798</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">10</td>
+                            <td class=" ">黎明殺機</td>
+                            <td class=" ">155453</td>
+                          </tr>
+						  
+						  <tr class="even pointer">
+                            <td class=" ">11</td>
+                            <td class=" ">進擊的巨人</td>
+                            <td class=" ">148515</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">12</td>
+                            <td class=" ">龍珠：超宇宙2</td>
+                            <td class=" ">137454</td>
+                          </tr>
+						  <tr class="even pointer">
+                            <td class=" ">13</td>
+                            <td class=" ">星界邊境</td>
+                            <td class=" ">81325</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class=" ">14</td>
+                            <td class=" ">恐怖黎明</td>
+                            <td class=" ">77548</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+	        </div>
+			
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <a> 不知道名字遊戲論壇由名字不會取建立 </a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+	
+	<!-- Placed at the end of the document so the pages load faster ->
+    <script src="../js/jquery-1.9.1.min.js"></script-->
+    <script src="../vendors/slider/examples-bootstrap/bootstrap.min.js"></script>
+    <!--script src="../vendors/slider/examples-bootstrap/docs.min.js"></script-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../vendors/slider/examples-bootstrap/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- jssor slider scripts-->
+    <!-- use jssor.slider.debug.js for debug -->
+    <script type="text/javascript" src="../vendors/slider/js/jssor.slider.mini.js"></script>
+    <script>
+
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $Idle: 2000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideEasing: $JssorEasing$.$EaseOutQuint,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+                $SlideDuration: 800,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $Cols: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 1,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $Cols is greater than 1, or parking position is not 0)
+
+                $ArrowNavigatorOptions: {                           //[Optional] Options to specify and enable arrow navigator or not
+                    $Class: $JssorArrowNavigator$,                  //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                    $Scale: false                                   //Scales bullets navigator or not while slider scale
+                },
+
+                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                    $Rows: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                    $SpacingX: 12,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 4,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+                    $Orientation: 1,                                //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+                    $Scale: false                                   //Scales bullets navigator or not while slider scale
+                }
+            };
+
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizing
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    jssor_slider1.$ScaleWidth(parentWidth - 30);
+                }
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
+    </script>
+  </body>
+</html>

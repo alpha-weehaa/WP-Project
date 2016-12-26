@@ -543,13 +543,13 @@ a:hover, a:focus {
 
 .top_nav .navbar-right {
   margin: 0;
-  width: 50%;
+  width: 34%;
   float: right; }
 
 /**search bar margin**/
 .top_nav .navbar-left {
-  margin: 11px 0 0 -20px;
-  width: 40%;
+  margin: 11px 0 0 15px;
+  width: 50%;
   display: inline;
   float: left; }
   

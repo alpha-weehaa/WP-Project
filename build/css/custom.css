@@ -320,7 +320,7 @@ body .container.body .right_col {
     padding-right: 0; }
 
   .right_col {
-    padding: 57.5px !important; } }
+    padding: 10px !important; } }
 @media (max-width: 1200px) {
   .x_title h2 {
     width: 62%;
